@@ -78,12 +78,9 @@ public class Main {
                 }
             }
         }
-
+        makeDkaStatesFinish();
         printResult();
         System.out.println("Hello, world");
-    }
-
-    private static void printResult() {
     }
 
     private static DkaState getDkaStateFromRule(ArrayList<Rule> ruleList, String state, String alph) {
@@ -113,6 +110,27 @@ public class Main {
             }
         }
         return dkaState;
+    }
+
+    private static void makeDkaStatesFinish() {
+        for (DkaState dkaState : dkaStateList) {
+            for (String finalState : finalStateList) {
+                for (String s : dkaState.getStates()) {
+                    if (s.equals(finalState)){
+                        dkaState.setFinished(true);
+                    }
+                }
+            }
+        }
+    }
+
+    private static void printResult() {
+        for (DkaState dkaState : dkaStateList) {
+            System.out.println(dkaState);
+        }
+        for(DkaRule dkaRule: dkaRuleList){
+            System.out.println(dkaRule);
+        }
     }
 
     private static DkaState findAndGetDkaState(DkaState o) {

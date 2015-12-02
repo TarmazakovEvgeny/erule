@@ -16,6 +16,15 @@ public class DkaRule {
         this.on = on;
     }
 
+    @Override
+    public String toString() {
+        return "DkaRule{" +
+                "from='" + from + '\'' +
+                ", to='" + to + '\'' +
+                ", on='" + on + '\'' +
+                '}';
+    }
+
     public String getFrom() {
         return from;
     }

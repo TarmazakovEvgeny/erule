@@ -50,4 +50,13 @@ public class DkaState {
     public void setFinished(Boolean finished) {
         this.finished = finished;
     }
+
+    @Override
+    public String toString() {
+        return "DkaState{" +
+                "name='" + name + '\'' +
+                ", states=" + states +
+                ", finished=" + finished +
+                '}';
+    }
 }
