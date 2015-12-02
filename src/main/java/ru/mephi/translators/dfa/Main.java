@@ -1,5 +1,10 @@
 package ru.mephi.translators.dfa;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,7 +30,6 @@ public class Main {
     private static boolean active = true;
 
     public static void main(String[] arguments) {
-
 //        n — количество состояний
 //        m — количество конечных состояний
 //        k — количество символов в алфавите
@@ -37,8 +41,8 @@ public class Main {
 //        A B a — правила
 
 
-        //readDataFromConsole(stateList, finalStateList, alphabetList, ruleList);
-        initTestData();
+        readDataFromConsole(stateList, finalStateList, alphabetList, ruleList);
+        //initTestData();
 
 //        for (String state : stateList) {
 //            for (String alph : alphabetList) {
@@ -116,7 +120,7 @@ public class Main {
         for (DkaState dkaState : dkaStateList) {
             for (String finalState : finalStateList) {
                 for (String s : dkaState.getStates()) {
-                    if (s.equals(finalState)){
+                    if (s.equals(finalState)) {
                         dkaState.setFinished(true);
                     }
                 }
@@ -128,7 +132,7 @@ public class Main {
         for (DkaState dkaState : dkaStateList) {
             System.out.println(dkaState);
         }
-        for(DkaRule dkaRule: dkaRuleList){
+        for (DkaRule dkaRule : dkaRuleList) {
             System.out.println(dkaRule);
         }
     }
@@ -273,5 +277,27 @@ public class Main {
         rule = new Rule("q7", "q5", "c");
         ruleList.add(rule);
 
+    }
+
+    private static void readFile() {
+        String line;
+        try {
+            InputStream fis = new FileInputStream("/home/evgeny/IdeaProjects/dfa/src/main/java/ru/mephi/translators/dfa/data.txt");
+            InputStreamReader isr = new InputStreamReader(fis, Charset.forName("UTF-8"));
+            BufferedReader br = new BufferedReader(isr);
+            while ((line = br.readLine()) != null) {
+                Rule rule = new Rule();
+                ArrayList<String> arr = new ArrayList<String>();
+                for (String s : line.split(" ")) {
+                    arr.add(s);
+                }
+                rule.setFrom(arr.get(0));
+                rule.setIn(arr.get(1));
+                rule.setOn(arr.get(2));
+                ruleList.add(rule);
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR");
+        }
     }
 }
