@@ -1,4 +1,4 @@
-package ru.mephi.translators.dfa;
+package ru.mephi.translators.erule;
 
 
 public class DkaRule {
